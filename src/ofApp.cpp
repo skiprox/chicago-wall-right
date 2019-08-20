@@ -23,7 +23,7 @@ void ofApp::setupImages(){
 	background.load("images/background.png");
 	companies.load("images/companies.png");
 	ship.load("images/ship.png");
-	airplane.load("images/airplane.png");
+	plane.load("images/airplane.png");
 	buildingLeft.load("images/building-left.png");
 	buildingRight.load("images/building-right.png");
 }
@@ -34,6 +34,39 @@ void ofApp::setupAnimations(){
 	 * ALL THE ANIMATIONS GO HERE
 	 */
 	// NOTHING TO SEE HERE SO FAR
+	/**
+	 * ALL THE IMAGE ANIMATIONS GO HERE
+	 */
+	companiesAnimation = ImageAnimation(
+		companies,
+		glm::vec2(width/2.0, height - 120),
+		glm::vec2(800, 200),
+		150
+	);
+	buildingLeftAnimation = ImageAnimation(
+		buildingLeft,
+		glm::vec2(425, 490),
+		glm::vec2(300, 280),
+		150
+	);
+	buildingRightAnimation = ImageAnimation(
+		buildingRight,
+		glm::vec2(775, 465),
+		glm::vec2(300, 230),
+		150
+	);
+	planeAnimation = ImageAnimation(
+		plane,
+		glm::vec2(620, 350),
+		glm::vec2(140, 45),
+		150
+	);
+	shipAnimation = ImageAnimation(
+		ship,
+		glm::vec2(width - 380, 100),
+		glm::vec2(300, 113),
+		150
+	);
 	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */
@@ -161,6 +194,11 @@ void ofApp::keyPressed(int key){
 			touchThreshold[keyIndex] = 0;
 			checkShouldRunAnimations(keyIndex);
 		}
+	} else if (key == 32) {
+		for (int i = 0; i < shouldRunAnimation.size(); i++) {
+			shouldRunAnimation[i] = false;
+			animationCounter[i] = 0;
+		}
 	}
 }
 
@@ -168,10 +206,8 @@ void ofApp::keyPressed(int key){
 void ofApp::checkShouldRunAnimations(int index){
 	// If it's the first button, we should run the animation
 	if (index == 0) {
-		cout << "WE FUCKING DID IT!!!!" << endl;
 		shouldRunAnimation[index] = true;
 	} else if (index == 1 || index == 2) {
-		cout << "WHY ARENT WE DOING THIS???" << index << endl;
 		if (shouldRunAnimation[0]) {
 			shouldRunAnimation[index] = true;
 		}
@@ -188,22 +224,28 @@ void ofApp::runAnimation(int animationNum){
 		case 1:
 			ofPushStyle();
 			handMarkers[1].draw();
-			companies.draw(width/3.0 - 100, height - 240, 800, 200);
+			companiesAnimation.update(animationCounter[0]);
+			companiesAnimation.draw();
+			//companies.draw(width/3.0 - 100, height - 240, 800, 200);
 			ofPopStyle();
 			break;
 		case 2:
 			ofPushStyle();
 			// Building Left
-			buildingLeft.draw(280, 350, 300, 280);
+			buildingLeftAnimation.update(animationCounter[1]);
+			buildingLeftAnimation.draw();
 			handMarkers[2].draw();
 			// Building Right
-			buildingRight.draw(600, 400, 300, 230);
+			buildingRightAnimation.update(animationCounter[1]);
+			buildingRightAnimation.draw();
 			handMarkers[3].draw();
 			// Ship
-			ship.draw(width - 380, 100, 300, 113);
+			shipAnimation.update(animationCounter[1]);
+			shipAnimation.draw();
 			handMarkers[4].draw();
 			// Airplane
-			airplane.draw(width/2.0 - 140, 300, 140, 45);
+			planeAnimation.update(animationCounter[1]);
+			planeAnimation.draw();
 			handMarkers[5].draw();
 			ofPopStyle();
 			break;
@@ -250,7 +292,7 @@ void ofApp::runAnimation(int animationNum){
 			ofPopStyle();
 			break;
 		default:
-			cout << "WHAT FUCKING KEY IS THIS?? " << animationNum << endl;
+			// Do nothing, this is meaningless
 			break;
 	}
 }

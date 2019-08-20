@@ -7,6 +7,7 @@
 #include "DashedLine.hpp"
 #include "DottedLine.hpp"
 #include "HandMarker.hpp"
+#include "ImageAnimation.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -59,6 +60,13 @@ class ofApp : public ofBaseApp{
         // All images declared here
         ofImage background;
         ofImage companies;
-        ofImage airplane, ship, buildingLeft, buildingRight;
+        ofImage plane, ship, buildingLeft, buildingRight;
+
+        // All image animations
+        ImageAnimation companiesAnimation,
+            shipAnimation,
+            buildingLeftAnimation,
+            buildingRightAnimation,
+            planeAnimation;
 		
 };
