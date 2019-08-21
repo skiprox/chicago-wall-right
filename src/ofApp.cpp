@@ -68,6 +68,37 @@ void ofApp::setupAnimations(){
 		150
 	);
 	/**
+	 * ALL THE TEXT TYPING GO HERE
+	 */
+	buildingLeftText = TextTyping(
+		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
+		glm::vec2(300, 375),
+		ofColor(40),
+		10,
+		150
+	);
+	buildingRightText = TextTyping(
+		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
+		glm::vec2(1030, 450),
+		ofColor(40),
+		10,
+		150
+	);
+	planeText = TextTyping(
+		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
+		glm::vec2(600, 250),
+		ofColor(40),
+		10,
+		150
+	);
+	shipText = TextTyping(
+		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
+		glm::vec2(775, 60),
+		ofColor(40),
+		10,
+		150
+	);
+	/**
 	 * ALL THE HAND MARKERS GO HERE
 	 */
 	// MILLENIUM FALCON
@@ -207,12 +238,24 @@ void ofApp::checkShouldRunAnimations(int index){
 	// If it's the first button, we should run the animation
 	if (index == 0) {
 		shouldRunAnimation[index] = true;
-	} else if (index == 1 || index == 2) {
+	} else if (index == 1) { // The bad companies sensor
 		if (shouldRunAnimation[0]) {
 			shouldRunAnimation[index] = true;
 		}
-	} else if (index == 3 || index == 4) {
-		if (shouldRunAnimation[1] || shouldRunAnimation[2]) {
+	} else if (index == 2) { // The left building text
+		if (shouldRunAnimation[1]) {
+			shouldRunAnimation[index] = true;
+		}
+	} else if (index == 3) { // The right building text
+		if (shouldRunAnimation[1]) {
+			shouldRunAnimation[index] = true;
+		}
+	} else if (index == 4) { // The plane text
+		if (shouldRunAnimation[1]) {
+			shouldRunAnimation[index] = true;
+		}
+	} else if (index == 5) { // The ship text
+		if (shouldRunAnimation[1]) {
 			shouldRunAnimation[index] = true;
 		}
 	}
@@ -249,28 +292,28 @@ void ofApp::runAnimation(int animationNum){
 			handMarkers[5].draw();
 			ofPopStyle();
 			break;
-		case 3:
+		case 3: // The Left Building Text
 			ofPushStyle();
-			ofSetColor(red);
-			ofDrawRectangle(width - width/3.0, 0, width/3.0, height/5.0);
+			buildingLeftText.update(animationCounter[2]);
+			buildingLeftText.draw();
 			ofPopStyle();
 			break;
-		case 4:
+		case 4: // The Right Building Text
 			ofPushStyle();
-			ofSetColor(red);
-			ofDrawRectangle(0, height/5.0, width/3.0, height - 2.0 * (height/5.0));
+			buildingRightText.update(animationCounter[3]);
+			buildingRightText.draw();
 			ofPopStyle();
 			break;
-		case 5:
+		case 5: // The Plane Text
 			ofPushStyle();
-			ofSetColor(red);
-			ofDrawRectangle(width/3.0, height/5.0, width/3.0, height - 2.0 * (height/5.0));
+			planeText.update(animationCounter[4]);
+			planeText.draw();
 			ofPopStyle();
 			break;
 		case 6:
 			ofPushStyle();
-			ofSetColor(red);
-			ofDrawRectangle(width - width/3.0, height/5.0, width/3.0, height - 2.0 * (height/5.0));
+			shipText.update(animationCounter[5]);
+			shipText.draw();
 			ofPopStyle();
 			break;
 		case 7:
