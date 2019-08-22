@@ -41,11 +41,9 @@ void ImageAnimation::draw() {
 	ofPushMatrix();
 	// The *~*magic*~*
 	ofTranslate(pos);
-	float easedValue = bounceEaseOut(ofClamp(float(inc)/float(incMax), 0.0, 1.0));
-	// Change the size
-	ofScale(easedValue, easedValue);
+	float easedValue = quadEaseOut(ofClamp(float(inc)/float(incMax), 0.0, 1.0));
 	// Change the opacity
-	// ofSetColor(255, 255, 255, ofMap(easedValue, 0.0, 1.0, 0, 255));
+	ofSetColor(255, 255, 255, ofMap(easedValue, 0.0, 1.0, 0, 255));
 	img.draw(-size.x/2.0, -size.y/2.0, size.x, size.y);
 	ofPopMatrix();
 	ofPopStyle();
@@ -65,4 +63,9 @@ float ImageAnimation::bounceEaseOut(float t) {
 		float postFix = t-=(2.625f/2.75f);
 		return (7.5625f*(postFix)*t + .984375f);
 	}
+}
+
+//--------------------------------------------------------------
+float ImageAnimation::quadEaseOut(float t) {
+	return -1.0 *(t)*(t-2);
 }

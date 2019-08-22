@@ -18,6 +18,7 @@ public:
 	void update(int _inc);
 	void draw();
 	float bounceEaseOut(float t);
+	float quadEaseOut(float t);
 
 	ofImage img;
 	glm::vec2 pos, size;

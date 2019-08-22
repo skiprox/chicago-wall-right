@@ -6,6 +6,7 @@ void ofApp::setup(){
 	ofSetCircleResolution(100);
 	width = ofGetWidth();
 	height = ofGetHeight();
+	cout << "WIDTH: " << width << " HEIGHT: " << height << endl;
 	// Small square size
 	smSqSize = height/5.0;
 	mySerial.listDevices();
@@ -20,7 +21,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::setupImages(){
-	background.load("images/background.png");
+	background.load("images/background-alt.png");
 	companies.load("images/companies.png");
 	ship.load("images/ship.png");
 	plane.load("images/airplane.png");
@@ -41,60 +42,60 @@ void ofApp::setupAnimations(){
 		companies,
 		glm::vec2(width/2.0, height - 120),
 		glm::vec2(800, 200),
-		150
+		300
 	);
 	buildingLeftAnimation = ImageAnimation(
 		buildingLeft,
-		glm::vec2(425, 490),
+		glm::vec2(520, 550),
 		glm::vec2(300, 280),
-		150
+		300
 	);
 	buildingRightAnimation = ImageAnimation(
 		buildingRight,
-		glm::vec2(775, 465),
+		glm::vec2(1120, 570),
 		glm::vec2(300, 230),
-		150
+		300
 	);
 	planeAnimation = ImageAnimation(
 		plane,
-		glm::vec2(620, 350),
+		glm::vec2(800, 520),
 		glm::vec2(140, 45),
-		150
+		300
 	);
 	shipAnimation = ImageAnimation(
 		ship,
-		glm::vec2(width - 380, 100),
+		glm::vec2(1570, 180),
 		glm::vec2(300, 113),
-		150
+		300
 	);
 	/**
 	 * ALL THE TEXT TYPING GO HERE
 	 */
 	buildingLeftText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(300, 375),
-		ofColor(40),
+		glm::vec2(250, 450),
+		ofColor(255),
 		10,
 		150
 	);
 	buildingRightText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(1030, 450),
-		ofColor(40),
+		glm::vec2(1350, 700),
+		ofColor(255),
 		10,
 		150
 	);
 	planeText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(600, 250),
-		ofColor(40),
+		glm::vec2(820, 700),
+		ofColor(255),
 		10,
 		150
 	);
 	shipText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(775, 60),
-		ofColor(40),
+		glm::vec2(1320, 140),
+		ofColor(255),
 		10,
 		150
 	);
@@ -166,8 +167,8 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::drawBackground(){
 	ofPushStyle();
-	ofBackground(255);
-	ofSetColor(0);
+	ofBackground(0);
+	ofSetColor(255);
 	// Draw up and down lines
 	for (int i = 0; i < 2; i++) {
 		ofDrawRectangle(width/3.0 * (i + 1) - 1, 0, 2, height);
