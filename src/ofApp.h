@@ -14,7 +14,7 @@ class ofApp : public ofBaseApp{
 
 	public:
 		void setup();
-        void setupImages();
+        void setupMedia();
         void setupAnimations();
 		void update();
 		void updateSerials();
@@ -62,6 +62,9 @@ class ofApp : public ofBaseApp{
         ofImage background;
         ofImage companies;
         ofImage plane, ship, buildingLeft, buildingRight;
+
+        // All Videos declared here
+        ofVideoPlayer waterVideo;
 
         // All image animations
         ImageAnimation companiesAnimation,

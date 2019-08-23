@@ -15,18 +15,22 @@ void ofApp::setup(){
 	mySerial.startContinuousRead();
 	ofAddListener(mySerial.NEW_MESSAGE,this,&ofApp::onNewMessage);
 	message = "";
-	setupImages();
+	setupMedia();
 	setupAnimations();
 }
 
 //--------------------------------------------------------------
-void ofApp::setupImages(){
+void ofApp::setupMedia(){
+	// IMAGES
 	background.load("images/background.png");
 	companies.load("images/companies.png");
 	ship.load("images/ship.png");
 	plane.load("images/airplane.png");
 	buildingLeft.load("images/building-left.png");
 	buildingRight.load("images/building-right.png");
+	// VIDEOS
+	waterVideo.load("video/water-black-720.mov");
+	waterVideo.play();
 }
 
 //--------------------------------------------------------------
@@ -169,6 +173,9 @@ void ofApp::drawBackground(){
 	ofPushStyle();
 	ofBackground(0);
 	ofSetColor(255);
+	// Draw the video
+	waterVideo.update();
+	waterVideo.draw(0, 0, width, height);
 	// Draw up and down lines
 	for (int i = 0; i < 2; i++) {
 		ofDrawRectangle(width/3.0 * (i + 1) - 1, 0, 2, height);
