@@ -21,7 +21,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::setupImages(){
-	background.load("images/background-alt.png");
+	background.load("images/background.png");
 	companies.load("images/companies.png");
 	ship.load("images/ship.png");
 	plane.load("images/airplane.png");
