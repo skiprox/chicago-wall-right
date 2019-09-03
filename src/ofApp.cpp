@@ -8,7 +8,7 @@ void ofApp::setup(){
 	height = ofGetHeight();
 	cout << "WIDTH: " << width << " HEIGHT: " << height << endl;
 	// Small square size
-	smSqSize = height/5.0;
+	smSqSize = fixedHeight/5.0;
 	mySerial.listDevices();
 	vector <ofSerialDeviceInfo> deviceList = mySerial.getDeviceList();
 	mySerial.setup(0, baud); //open the first device
@@ -44,7 +44,7 @@ void ofApp::setupAnimations(){
 	 */
 	companiesAnimation = ImageAnimation(
 		companies,
-		glm::vec2(width/2.0, height - 120),
+		glm::vec2(fixedWidth/2.0, fixedHeight - 120),
 		glm::vec2(800, 200),
 		300
 	);
@@ -107,17 +107,17 @@ void ofApp::setupAnimations(){
 	 * ALL THE HAND MARKERS GO HERE
 	 */
 	// MILLENIUM FALCON
-	handMarkers[0] = HandMarker(glm::vec2(0, height - 100), red);
+	handMarkers[0] = HandMarker(glm::vec2(0, fixedHeight - 100), red, true);
 	// ABOVE THE COMPANIES
-	handMarkers[1] = HandMarker(glm::vec2(width/3.0 - 80, height - 200), red);
+	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/3.0 - 80, fixedHeight - 200), red, false);
 	// THE LEFT BUILDING
-	handMarkers[2] = HandMarker(glm::vec2(380, 380), red);
+	handMarkers[2] = HandMarker(glm::vec2(380, 380), red, true);
 	// THE RIGHT BUILDING
-	handMarkers[3] = HandMarker(glm::vec2(660, 460), red);
+	handMarkers[3] = HandMarker(glm::vec2(660, 460), red, true);
 	// THE SHIP
-	handMarkers[4] = HandMarker(glm::vec2(1050, 125), red);
+	handMarkers[4] = HandMarker(glm::vec2(1050, 125), red, true);
 	// THE AIRPLANE
-	handMarkers[5] = HandMarker(glm::vec2(560, 300), red);
+	handMarkers[5] = HandMarker(glm::vec2(560, 300), red, true);
 }
 
 //--------------------------------------------------------------
@@ -175,19 +175,19 @@ void ofApp::drawBackground(){
 	ofSetColor(255);
 	// Draw the video
 	waterVideo.update();
-	waterVideo.draw(0, 0, width, height);
+	waterVideo.draw(0, 0, fixedWidth, fixedHeight);
 	// Draw up and down lines
 	for (int i = 0; i < 2; i++) {
-		ofDrawRectangle(width/3.0 * (i + 1) - 1, 0, 2, height);
+		ofDrawRectangle(fixedWidth/3.0 * (i + 1) - 1, 0, 2, fixedHeight);
 		float divConst = 5.0;
 		if (i == 0) {
-			ofDrawRectangle(0, height/divConst, width, 2);
+			ofDrawRectangle(0, fixedHeight/divConst, fixedWidth, 2);
 		} else {
-			ofDrawRectangle(0, height - height/divConst, width, 2);
+			ofDrawRectangle(0, fixedHeight - fixedHeight/divConst, fixedWidth, 2);
 		}
 	}
 	ofPopStyle();
-	background.draw(0, 0, width, height);
+	background.draw(0, 0, fixedWidth, fixedHeight);
 }
 
 //--------------------------------------------------------------
@@ -327,19 +327,19 @@ void ofApp::runAnimation(int animationNum){
 		case 7:
 			ofPushStyle();
 			ofSetColor(red);
-			ofDrawRectangle(0, height - height/5.0, width/3.0, height/3.0);
+			ofDrawRectangle(0, fixedHeight - fixedHeight/5.0, width/3.0, fixedHeight/3.0);
 			ofPopStyle();
 			break;
 		case 8:
 			ofPushStyle();
 			ofSetColor(red);
-			ofDrawRectangle(width/3.0, height - height/5.0, width/3.0, height/3.0);
+			ofDrawRectangle(width/3.0, fixedHeight - fixedHeight/5.0, width/3.0, fixedHeight/3.0);
 			ofPopStyle();
 			break;
 		case 9:
 			ofPushStyle();
 			ofSetColor(red);
-			ofDrawRectangle(width/3.0 * 2, height - height/5.0, width/3.0, height/3.0);
+			ofDrawRectangle(width/3.0 * 2, fixedHeight - fixedHeight/5.0, width/3.0, fixedHeight/3.0);
 			ofPopStyle();
 			break;
 		default:

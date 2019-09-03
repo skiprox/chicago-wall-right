@@ -12,12 +12,14 @@ HandMarker::HandMarker()
 	// If we're doing a default one, place it off screen
 	center = glm::vec2(-200, -200);
 	color = ofColor(240, 60, 40);
+	isCircle = true;
     setup();
 }
 
-HandMarker::HandMarker(glm::vec2 _center, ofColor _color) {
+HandMarker::HandMarker(glm::vec2 _center, ofColor _color, bool _isCircle) {
 	center = _center;
 	color = _color;
+	isCircle = _isCircle;
     setup();
 }
 
@@ -33,10 +35,19 @@ void HandMarker::draw() {
 	ofPushStyle();
 	ofSetColor(color);
 	float radius = 20 + 8 * sin(inc);
-	ofFill();		// draw "filled shapes"
-	ofDrawCircle(center.x, center.y, radius);
-	ofNoFill();
-	ofSetColor(color);
-	ofDrawCircle(center.x, center.y, 30);
+	if (isCircle) {
+		ofFill();
+		ofDrawCircle(center.x, center.y, radius);
+		ofNoFill();
+		ofSetColor(color);
+		ofDrawCircle(center.x, center.y, 30);
+	} else {
+		ofSetRectMode(OF_RECTMODE_CENTER);
+		ofFill();
+		ofDrawRectangle(center.x, center.y, radius, radius);
+		ofNoFill();
+		ofSetColor(color);
+		ofDrawRectangle(center.x, center.y, 30, 30);
+	}
 	ofPopStyle();
 }
