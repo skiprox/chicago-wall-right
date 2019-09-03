@@ -45,30 +45,30 @@ void ofApp::setupAnimations(){
 	companiesAnimation = ImageAnimation(
 		companies,
 		glm::vec2(fixedWidth/2.0, fixedHeight - 120),
-		glm::vec2(800, 200),
+		glm::vec2(800, 184),
 		300
 	);
 	buildingLeftAnimation = ImageAnimation(
 		buildingLeft,
-		glm::vec2(520, 550),
-		glm::vec2(300, 280),
+		glm::vec2(515, 540),
+		glm::vec2(316, 296),
 		300
 	);
 	buildingRightAnimation = ImageAnimation(
 		buildingRight,
-		glm::vec2(1120, 570),
-		glm::vec2(300, 230),
+		glm::vec2(1085, 552),
+		glm::vec2(342, 262),
 		300
 	);
 	planeAnimation = ImageAnimation(
 		plane,
-		glm::vec2(800, 520),
-		glm::vec2(140, 45),
+		glm::vec2(150, 450),
+		glm::vec2(300, 95),
 		300
 	);
 	shipAnimation = ImageAnimation(
 		ship,
-		glm::vec2(1570, 180),
+		glm::vec2(1725, 700),
 		glm::vec2(300, 113),
 		300
 	);
@@ -77,28 +77,28 @@ void ofApp::setupAnimations(){
 	 */
 	buildingLeftText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(250, 450),
+		glm::vec2(690, 650),
 		ofColor(255),
 		10,
 		150
 	);
 	buildingRightText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(1350, 700),
+		glm::vec2(1300, 700),
 		ofColor(255),
 		10,
 		150
 	);
 	planeText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(820, 700),
+		glm::vec2(150, 590),
 		ofColor(255),
 		10,
 		150
 	);
 	shipText = TextTyping(
 		"Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit,\nsed do eiusmod tempor\nincididunt ut labore et dolore\nmagna aliqua.",
-		glm::vec2(1320, 140),
+		glm::vec2(1590, 840),
 		ofColor(255),
 		10,
 		150
@@ -107,17 +107,17 @@ void ofApp::setupAnimations(){
 	 * ALL THE HAND MARKERS GO HERE
 	 */
 	// MILLENIUM FALCON
-	handMarkers[0] = HandMarker(glm::vec2(0, fixedHeight - 100), red, true);
-	// ABOVE THE COMPANIES
-	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/3.0 - 80, fixedHeight - 200), red, false);
+	handMarkers[0] = HandMarker(glm::vec2(60, fixedHeight - 100), red, true);
+	// CENTER OF THE COMPANIES
+	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/2.0 + 40, fixedHeight - 115), red, false);
 	// THE LEFT BUILDING
-	handMarkers[2] = HandMarker(glm::vec2(380, 380), red, true);
+	handMarkers[2] = HandMarker(glm::vec2(510, 550), red, true);
 	// THE RIGHT BUILDING
-	handMarkers[3] = HandMarker(glm::vec2(660, 460), red, true);
+	handMarkers[3] = HandMarker(glm::vec2(1100, 530), red, true);
 	// THE SHIP
-	handMarkers[4] = HandMarker(glm::vec2(1050, 125), red, true);
+	handMarkers[4] = HandMarker(glm::vec2(1705, 720), red, true);
 	// THE AIRPLANE
-	handMarkers[5] = HandMarker(glm::vec2(560, 300), red, true);
+	handMarkers[5] = HandMarker(glm::vec2(150, 470), red, true);
 }
 
 //--------------------------------------------------------------
