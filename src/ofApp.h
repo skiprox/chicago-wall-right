@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Constants.hpp"
 #include "ofxSimpleSerial.h"
+#include "ofxGif.h"
 #include "Line.hpp"
 #include "DashedLine.hpp"
 #include "DottedLine.hpp"
@@ -65,6 +66,10 @@ class ofApp : public ofBaseApp{
         ofImage background;
         ofImage companies;
         ofImage plane, ship, buildingLeft, buildingRight;
+        ofImage water;
+        ofxGIF::fiGifLoader gifloader;
+
+        int gifIndex = 0;
 
         // All Videos declared here
         ofVideoPlayer waterVideo;

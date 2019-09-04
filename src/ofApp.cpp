@@ -28,9 +28,12 @@ void ofApp::setupMedia(){
 	plane.load("images/airplane.png");
 	buildingLeft.load("images/building-left.png");
 	buildingRight.load("images/building-right.png");
+	water.load("images/water.gif");
+	// GIFS
+	gifloader.load("images/ripple-large.gif");
 	// VIDEOS
-	waterVideo.load("video/ripple.mp4");
-	waterVideo.play();
+	//waterVideo.load("images/ripple.gif");
+	//waterVideo.play();
 }
 
 //--------------------------------------------------------------
@@ -174,8 +177,11 @@ void ofApp::drawBackground(){
 	ofBackground(0);
 	ofSetColor(255);
 	// Draw the video
-	waterVideo.update();
-	waterVideo.draw(0, 0, fixedWidth, fixedHeight);
+	//waterVideo.update();
+	//waterVideo.draw(0, 0, fixedWidth, fixedHeight);
+	// Draw the water gif
+	gifIndex = (gifIndex + 1) % gifloader.pages.size();
+	gifloader.pages[gifIndex].draw(0, 0);
 	// Draw up and down lines
 	for (int i = 0; i < 2; i++) {
 		ofDrawRectangle(fixedWidth/3.0 * (i + 1) - 1, 0, 2, fixedHeight);
