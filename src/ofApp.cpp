@@ -29,7 +29,7 @@ void ofApp::setupMedia(){
 	buildingLeft.load("images/building-left.png");
 	buildingRight.load("images/building-right.png");
 	// VIDEOS
-	waterVideo.load("video/water-black-720.mov");
+	waterVideo.load("video/ripple-2secs-480.mov");
 	waterVideo.play();
 }
 
