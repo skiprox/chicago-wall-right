@@ -29,8 +29,18 @@ void ofApp::setupMedia(){
 	buildingLeft.load("images/building-left.png");
 	buildingRight.load("images/building-right.png");
 	// VIDEOS
-	waterVideo.load("video/ripple.mp4");
-	waterVideo.play();
+	string videoPath = ofToDataPath("videos/ripple.mp4", true);
+    ofLog() << "videoPath: " << videoPath;
+	//Somewhat like ofFboSettings we may have a lot of options so this is the current model
+	ofxOMXPlayerSettings settings;
+	settings.videoPath = videoPath;
+	settings.useHDMIForAudio = true;	//default true
+	settings.enableTexture = true;		//default true
+	settings.enableLooping = true;		//default true
+	settings.enableAudio = false;		//default true, save resources by disabling
+	//settings.doFlipTexture = true;		//default false
+	//so either pass in the settings
+	omxPlayer.setup(settings);
 }
 
 //--------------------------------------------------------------
@@ -174,8 +184,7 @@ void ofApp::drawBackground(){
 	ofBackground(0);
 	ofSetColor(255);
 	// Draw the video
-	waterVideo.update();
-	waterVideo.draw(0, 0, fixedWidth, fixedHeight);
+	omxPlayer.draw(0, 0, fixedWidth, fixedHeight);
 	// Draw up and down lines
 	for (int i = 0; i < 2; i++) {
 		ofDrawRectangle(fixedWidth/3.0 * (i + 1) - 1, 0, 2, fixedHeight);

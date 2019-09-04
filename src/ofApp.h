@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Constants.hpp"
 #include "ofxSimpleSerial.h"
+#include "ofxOMXPlayer.h"
 #include "Line.hpp"
 #include "DashedLine.hpp"
 #include "DottedLine.hpp"
@@ -67,7 +68,7 @@ class ofApp : public ofBaseApp{
         ofImage plane, ship, buildingLeft, buildingRight;
 
         // All Videos declared here
-        ofVideoPlayer waterVideo;
+        ofxOMXPlayer omxPlayer;
 
         // All image animations
         ImageAnimation companiesAnimation,
