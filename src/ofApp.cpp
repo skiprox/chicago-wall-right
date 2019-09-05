@@ -62,7 +62,7 @@ void ofApp::setupAnimations(){
 	);
 	planeAnimation = ImageAnimation(
 		plane,
-		glm::vec2(150, 450),
+		glm::vec2(250, 370),
 		glm::vec2(300, 95),
 		300
 	);
@@ -75,6 +75,13 @@ void ofApp::setupAnimations(){
 	/**
 	 * ALL THE TEXT TYPING GO HERE
 	 */
+	centerLeftText = TextTyping(
+		"Lorem ipsum dolor sit amet, consectetur adipisicing\nelit, sed do eiusmod tempor incididunt ut labore et\ndolore magna aliqua. Ut enim ad minim veniam, quis\nnostrud exercitation ullamco laboris nisi ut aliquip\nex ea commodo consequat. Duis aute irure dolor in\nreprehenderit in voluptate velit esse cillum dolore\neu fugiat nulla pariatur. Excepteur sint occaecat\ncupidatat non proident, sunt in culpa qui officia\ndeserunt mollit anim id est laborum. Lorem ipsum dolor\nsit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud exercitation\nullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate\nvelit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in\nculpa qui officia deserunt mollit anim id est laborum.",
+		glm::vec2(150, 780),
+		ofColor(255),
+		7,
+		150
+	);
 	buildingLeftText = TextTyping(
 		"Lorem ipsum dolor sit amet, consectetur adipisicing\nelit, sed do eiusmod tempor incididunt ut labore et\ndolore magna aliqua. Ut enim ad minim veniam, quis\nnostrud exercitation ullamco laboris nisi ut aliquip\nex ea commodo consequat. Duis aute irure dolor in\nreprehenderit in voluptate velit esse cillum dolore\neu fugiat nulla pariatur. Excepteur sint occaecat\ncupidatat non proident, sunt in culpa qui officia\ndeserunt mollit anim id est laborum. Lorem ipsum dolor\nsit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud exercitation\nullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate\nvelit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in\nculpa qui officia deserunt mollit anim id est laborum.",
 		glm::vec2(690, 650),
@@ -91,7 +98,7 @@ void ofApp::setupAnimations(){
 	);
 	planeText = TextTyping(
 		"Lorem ipsum dolor sit amet, consectetur adipisicing\nelit, sed do eiusmod tempor incididunt ut labore et\ndolore magna aliqua. Ut enim ad minim veniam, quis\nnostrud exercitation ullamco laboris nisi ut aliquip\nex ea commodo consequat. Duis aute irure dolor in\nreprehenderit in voluptate velit esse cillum dolore\neu fugiat nulla pariatur. Excepteur sint occaecat\ncupidatat non proident, sunt in culpa qui officia\ndeserunt mollit anim id est laborum. Lorem ipsum dolor\nsit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud exercitation\nullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate\nvelit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in\nculpa qui officia deserunt mollit anim id est laborum.",
-		glm::vec2(150, 590),
+		glm::vec2(250, 530),
 		ofColor(255),
 		7,
 		150
@@ -110,14 +117,18 @@ void ofApp::setupAnimations(){
 	handMarkers[0] = HandMarker(glm::vec2(60, fixedHeight - 100), red, true);
 	// CENTER OF THE COMPANIES
 	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/2.0 + 40, fixedHeight - 115), red, false);
+	// RIGHT OF THE COMPANIES
+	handMarkers[2] = HandMarker(glm::vec2(fixedWidth/3.0 * 2.0 + 60, fixedHeight - 185), red, false);
+	// LEFT OF THE SCREEN
+	handMarkers[3] = HandMarker(glm::vec2(60, fixedHeight/2.0 + 80), red, true);
 	// THE LEFT BUILDING
-	handMarkers[2] = HandMarker(glm::vec2(510, 550), red, true);
+	handMarkers[4] = HandMarker(glm::vec2(510, 550), red, true);
 	// THE RIGHT BUILDING
-	handMarkers[3] = HandMarker(glm::vec2(1100, 530), red, true);
+	handMarkers[5] = HandMarker(glm::vec2(1100, 530), red, true);
 	// THE SHIP
-	handMarkers[4] = HandMarker(glm::vec2(1705, 720), red, true);
+	handMarkers[6] = HandMarker(glm::vec2(1705, 720), red, true);
 	// THE AIRPLANE
-	handMarkers[5] = HandMarker(glm::vec2(150, 470), red, true);
+	handMarkers[7] = HandMarker(glm::vec2(250, 390), red, true);
 }
 
 //--------------------------------------------------------------
@@ -193,9 +204,6 @@ void ofApp::drawBackground(){
 //--------------------------------------------------------------
 void ofApp::drawHandMarkers(){
 	handMarkers[0].draw();
-	// for (int i = 0; i < handMarkers.size(); i++) {
-	// 	handMarkers[i].draw();
-	// }
 }
 
 //--------------------------------------------------------------
@@ -210,7 +218,7 @@ void ofApp::drawAnimations(){
 			// If we haven't hit the threshold for how long to
 			// run the animation, fucking run it
 			if (animationCounter[i] <= animationCounterMax[i]) {
-				runAnimation(i + 1);
+				runAnimation(i);
 			} else { // Otherwise stop running the animation
 				shouldRunAnimation[i] = false;
 				animationCounter[i] = 0;
@@ -245,26 +253,37 @@ void ofApp::keyPressed(int key){
 void ofApp::checkShouldRunAnimations(int index){
 	// If it's the first button, we should run the animation
 	if (index == 0) {
-		shouldRunAnimation[index] = true;
-	} else if (index == 1) { // The bad companies sensor
+		shouldRunAnimation[0] = true;
+	} else if (index == 1) { // The bad companies center sensor
 		if (shouldRunAnimation[0]) {
-			shouldRunAnimation[index] = true;
+			// Run the left center button animation
+			shouldRunAnimation[1] = true;
 		}
-	} else if (index == 2) { // The left building text
+	} else if (index == 2) { // The bad companies right sensor
 		if (shouldRunAnimation[1]) {
-			shouldRunAnimation[index] = true;
+			// Run the buildings animation
+			shouldRunAnimation[2] = true;
 		}
-	} else if (index == 3) { // The right building text
+	} else if (index == 3) { // The center left button
 		if (shouldRunAnimation[1]) {
-			shouldRunAnimation[index] = true;
+			// Run the text associated with that button
+			shouldRunAnimation[3] = true;
 		}
-	} else if (index == 4) { // The plane text
-		if (shouldRunAnimation[1]) {
-			shouldRunAnimation[index] = true;
+	} else if (index == 4) { // The left building button
+		if (shouldRunAnimation[2]) {
+			shouldRunAnimation[4] = true;
 		}
-	} else if (index == 5) { // The ship text
-		if (shouldRunAnimation[1]) {
-			shouldRunAnimation[index] = true;
+	} else if (index == 5) { // The right building button
+		if (shouldRunAnimation[2]) {
+			shouldRunAnimation[5] = true;
+		}
+	} else if (index == 6) { // The plane button
+		if (shouldRunAnimation[5]) {
+			shouldRunAnimation[6] = true;
+		}
+	} else if (index == 7) { // The right building button
+		if (shouldRunAnimation[5]) {
+			shouldRunAnimation[7] = true;
 		}
 	}
 }
@@ -272,74 +291,80 @@ void ofApp::checkShouldRunAnimations(int index){
 //--------------------------------------------------------------
 void ofApp::runAnimation(int animationNum){
 	switch(animationNum) {
-		case 1:
+		// Center button pressed,
+		// companies show up
+		case 0:
 			ofPushStyle();
-			handMarkers[1].draw();
 			companiesAnimation.update(animationCounter[0]);
 			companiesAnimation.draw();
-			//companies.draw(width/3.0 - 100, height - 240, 800, 200);
+			handMarkers[1].draw();
+			handMarkers[2].draw();
 			ofPopStyle();
 			break;
+		// Company center button pressed,
+		// left screen button shows up
+		case 1:
+			handMarkers[3].draw();
+			break;
+		// Company right button pressed,
+		// buildings show up
 		case 2:
 			ofPushStyle();
 			// Building Left
-			buildingLeftAnimation.update(animationCounter[1]);
+			buildingLeftAnimation.update(animationCounter[2]);
 			buildingLeftAnimation.draw();
-			handMarkers[2].draw();
-			// Building Right
-			buildingRightAnimation.update(animationCounter[1]);
-			buildingRightAnimation.draw();
-			handMarkers[3].draw();
-			// Ship
-			shipAnimation.update(animationCounter[1]);
-			shipAnimation.draw();
 			handMarkers[4].draw();
-			// Airplane
-			planeAnimation.update(animationCounter[1]);
-			planeAnimation.draw();
+			// Building Right
+			buildingRightAnimation.update(animationCounter[2]);
+			buildingRightAnimation.draw();
 			handMarkers[5].draw();
 			ofPopStyle();
 			break;
-		case 3: // The Left Building Text
+		// Screen center left button pressed,
+		// center left button text shows up
+		case 3:
 			ofPushStyle();
-			buildingLeftText.update(animationCounter[2]);
+			centerLeftText.update(animationCounter[3]);
+			centerLeftText.draw();
+			ofPopStyle();
+			break;
+		// Left building pressed,
+		// left building text shows up
+		case 4: // The Left Building Text
+			ofPushStyle();
+			buildingLeftText.update(animationCounter[4]);
 			buildingLeftText.draw();
 			ofPopStyle();
 			break;
-		case 4: // The Right Building Text
-			ofPushStyle();
-			buildingRightText.update(animationCounter[3]);
+		// Right building pressed,
+		// ship and airplane show up, right building text shows up
+		case 5:
+			// Ship
+			shipAnimation.update(animationCounter[5]);
+			shipAnimation.draw();
+			handMarkers[6].draw();
+			// Airplane
+			planeAnimation.update(animationCounter[5]);
+			planeAnimation.draw();
+			handMarkers[7].draw();
+			// Building right text
+			buildingRightText.update(animationCounter[5]);
 			buildingRightText.draw();
-			ofPopStyle();
 			break;
-		case 5: // The Plane Text
+		// Airplane button pressed
+		// Airplane text shows up
+		case 6:
 			ofPushStyle();
-			planeText.update(animationCounter[4]);
+			planeText.update(animationCounter[6]);
 			planeText.draw();
 			ofPopStyle();
 			break;
-		case 6:
-			ofPushStyle();
-			shipText.update(animationCounter[5]);
-			shipText.draw();
-			ofPopStyle();
-			break;
+		// Ship button pressed
+		// ship text shows up
 		case 7:
 			ofPushStyle();
-			ofSetColor(red);
-			ofDrawRectangle(0, fixedHeight - fixedHeight/5.0, width/3.0, fixedHeight/3.0);
-			ofPopStyle();
-			break;
-		case 8:
-			ofPushStyle();
-			ofSetColor(red);
-			ofDrawRectangle(width/3.0, fixedHeight - fixedHeight/5.0, width/3.0, fixedHeight/3.0);
-			ofPopStyle();
-			break;
-		case 9:
-			ofPushStyle();
-			ofSetColor(red);
-			ofDrawRectangle(width/3.0 * 2, fixedHeight - fixedHeight/5.0, width/3.0, fixedHeight/3.0);
+			shipText.update(animationCounter[7]);
+			shipText.draw();
 			ofPopStyle();
 			break;
 		default:

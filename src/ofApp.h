@@ -77,7 +77,8 @@ class ofApp : public ofBaseApp{
             planeAnimation;
 
         // All Text Typing animations
-        TextTyping buildingLeftText,
+        TextTyping centerLeftText,
+            buildingLeftText,
             buildingRightText,
             shipText,
             planeText;
