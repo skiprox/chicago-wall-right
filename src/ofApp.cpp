@@ -38,7 +38,14 @@ void ofApp::setupAnimations(){
 	/**
 	 * ALL THE ANIMATIONS GO HERE
 	 */
-	// NOTHING TO SEE HERE SO FAR
+	/**
+	 * ALL THE LINE ANIMATIONS GO HERE
+	 */
+	vector<std::array<glm::vec2, 2>> pts;
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 860), glm::vec2(fixedWidth/2.0, 750)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 750), glm::vec2(60, 750)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(60, 750), glm::vec2(60, 625)}});
+	leftHandMarkerLine = DashedLine(pts, 5.0, red, 250, false);
 	/**
 	 * ALL THE IMAGE ANIMATIONS GO HERE
 	 */
@@ -304,6 +311,8 @@ void ofApp::runAnimation(int animationNum){
 		// Company center button pressed,
 		// left screen button shows up
 		case 1:
+			leftHandMarkerLine.update(animationCounter[1]);
+			leftHandMarkerLine.draw();
 			handMarkers[3].draw();
 			break;
 		// Company right button pressed,

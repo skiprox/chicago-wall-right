@@ -61,6 +61,9 @@ class ofApp : public ofBaseApp{
     	// All the hand markers declared here
     	std::array<HandMarker, 9> handMarkers;
 
+        // All lines declared here
+        DashedLine leftHandMarkerLine;
+
         // All images declared here
         ofImage background;
         ofImage companies;
