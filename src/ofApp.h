@@ -8,6 +8,7 @@
 #include "DottedLine.hpp"
 #include "HandMarker.hpp"
 #include "ImageAnimation.hpp"
+#include "ImageMovement.hpp"
 #include "TextTyping.hpp"
 
 class ofApp : public ofBaseApp{
@@ -74,10 +75,12 @@ class ofApp : public ofBaseApp{
 
         // All image animations
         ImageAnimation companiesAnimation,
-            shipAnimation,
             buildingLeftAnimation,
-            buildingRightAnimation,
-            planeAnimation;
+            buildingRightAnimation;
+
+        // All image movements
+        ImageMovement shipMovement,
+            planeMovement;
 
         // All Text Typing animations
         TextTyping centerLeftText,

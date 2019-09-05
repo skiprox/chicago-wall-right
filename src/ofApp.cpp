@@ -53,31 +53,36 @@ void ofApp::setupAnimations(){
 		companies,
 		glm::vec2(fixedWidth/2.0, fixedHeight - 120),
 		glm::vec2(800, 184),
-		300
+		250
 	);
 	buildingLeftAnimation = ImageAnimation(
 		buildingLeft,
 		glm::vec2(515, 540),
 		glm::vec2(316, 296),
-		300
+		250
 	);
 	buildingRightAnimation = ImageAnimation(
 		buildingRight,
 		glm::vec2(1085, 552),
 		glm::vec2(342, 262),
-		300
+		250
 	);
-	planeAnimation = ImageAnimation(
+	/**
+	 * ALL THE IMAGE MOVEMENTS GO HERE
+	 */
+	planeMovement = ImageMovement(
 		plane,
-		glm::vec2(250, 370),
 		glm::vec2(300, 95),
-		300
+		glm::vec2(-300, -100),
+		glm::vec2(250, 370),
+		250
 	);
-	shipAnimation = ImageAnimation(
+	shipMovement = ImageMovement(
 		ship,
-		glm::vec2(1725, 700),
 		glm::vec2(300, 113),
-		300
+		glm::vec2(2000, 800),
+		glm::vec2(1725, 700),
+		250
 	);
 	/**
 	 * ALL THE TEXT TYPING GO HERE
@@ -349,12 +354,12 @@ void ofApp::runAnimation(int animationNum){
 		// ship and airplane show up, right building text shows up
 		case 5:
 			// Ship
-			shipAnimation.update(animationCounter[5]);
-			shipAnimation.draw();
+			shipMovement.update(animationCounter[5]);
+			shipMovement.draw();
 			handMarkers[6].draw();
 			// Airplane
-			planeAnimation.update(animationCounter[5]);
-			planeAnimation.draw();
+			planeMovement.update(animationCounter[5]);
+			planeMovement.draw();
 			handMarkers[7].draw();
 			// Building right text
 			buildingRightText.update(animationCounter[5]);
