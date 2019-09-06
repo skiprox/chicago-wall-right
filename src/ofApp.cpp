@@ -224,6 +224,7 @@ void ofApp::drawAnimations(){
 	// Run through the `shouldRunAnimation` array, and run any of the animations that we should
 	for (int i = 0; i < shouldRunAnimation.size(); i++) {
 		if (shouldRunAnimation[i]) {
+			// We're running an animation! so this is true
 			runningAnyAnimations = true;
 			// Increase the animation counter,
 			// which is what we're using to time things within the animation
