@@ -220,18 +220,26 @@ void ofApp::drawHandMarkers(){
 
 //--------------------------------------------------------------
 void ofApp::drawAnimations(){
+	bool runningAnyAnimations = false;
 	// Run through the `shouldRunAnimation` array, and run any of the animations that we should
 	for (int i = 0; i < shouldRunAnimation.size(); i++) {
 		if (shouldRunAnimation[i]) {
+			runningAnyAnimations = true;
 			// Increase the animation counter,
-			// which is what we're using to run the animation for
-			// a set amount of time
+			// which is what we're using to time things within the animation
 			animationCounter[i]++;
-			// If we haven't hit the threshold for how long to
-			// run the animation, fucking run it
-			if (animationCounter[i] <= animationCounterMax[i]) {
-				runAnimation(i);
-			} else { // Otherwise stop running the animation
+			// Run the fucking animation
+			runAnimation(i);
+		}
+	}
+	// If we are running any animations, increment
+	// the universal animation counter
+	// and check if we should stop running all animations
+	if (runningAnyAnimations) {
+		universalAnimationCounter++;
+		if (universalAnimationCounter >= universalAnimationCounterMax) {
+			universalAnimationCounter = 0;
+			for (int i = 0; i < shouldRunAnimation.size(); i++) {
 				shouldRunAnimation[i] = false;
 				animationCounter[i] = 0;
 			}
@@ -253,7 +261,7 @@ void ofApp::keyPressed(int key){
 			touchThreshold[keyIndex] = 0;
 			checkShouldRunAnimations(keyIndex);
 		}
-	} else if (key == 32) {
+	} else if (key == 32) { // Reset all animations
 		for (int i = 0; i < shouldRunAnimation.size(); i++) {
 			shouldRunAnimation[i] = false;
 			animationCounter[i] = 0;
@@ -263,40 +271,51 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::checkShouldRunAnimations(int index){
+	bool shouldRunOne = false;
 	// If it's the first button, we should run the animation
-	if (index == 0) {
-		shouldRunAnimation[0] = true;
+	if (index == 0) { // The millenium falcon button
+		// Run the companies animation
+		shouldRunOne = true;
 	} else if (index == 1) { // The bad companies center sensor
 		if (shouldRunAnimation[0]) {
 			// Run the left center button animation
-			shouldRunAnimation[1] = true;
+			shouldRunOne = true;
 		}
 	} else if (index == 2) { // The bad companies right sensor
 		if (shouldRunAnimation[1]) {
 			// Run the buildings animation
-			shouldRunAnimation[2] = true;
+			shouldRunOne = true;
 		}
 	} else if (index == 3) { // The center left button
 		if (shouldRunAnimation[1]) {
 			// Run the text associated with that button
-			shouldRunAnimation[3] = true;
+			shouldRunOne = true;
 		}
 	} else if (index == 4) { // The left building button
 		if (shouldRunAnimation[2]) {
-			shouldRunAnimation[4] = true;
+			// Run the left building text
+			shouldRunOne = true;
 		}
 	} else if (index == 5) { // The right building button
 		if (shouldRunAnimation[2]) {
-			shouldRunAnimation[5] = true;
+			// Run the right building text
+			// and ship and plane
+			shouldRunOne = true;
 		}
 	} else if (index == 6) { // The plane button
 		if (shouldRunAnimation[5]) {
-			shouldRunAnimation[6] = true;
+			// Run the plane text
+			shouldRunOne = true;
 		}
-	} else if (index == 7) { // The right building button
+	} else if (index == 7) { // The ship button
 		if (shouldRunAnimation[5]) {
-			shouldRunAnimation[7] = true;
+			// Run the ship text
+			shouldRunOne = true;
 		}
+	}
+	if (shouldRunOne) {
+		shouldRunAnimation[index] = true;
+		universalAnimationCounter = 0;
 	}
 }
 

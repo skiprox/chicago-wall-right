@@ -52,7 +52,8 @@ class ofApp : public ofBaseApp{
 
     	std::array<bool, 9> shouldRunAnimation = {{false, false, false, false, false, false, false, false, false}};
     	std::array<int, 9> animationCounter = {{0, 0, 0, 0, 0, 0, 0, 0, 0}};
-    	std::array<int, 9> animationCounterMax = {{5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000, 5000}};
+        int universalAnimationCounter = 0;
+        int universalAnimationCounterMax = 5000;
 
     	// All animations declared here
 
