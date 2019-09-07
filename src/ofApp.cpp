@@ -12,7 +12,7 @@ void ofApp::setup(){
 	mySerial.listDevices();
 	vector <ofSerialDeviceInfo> deviceList = mySerial.getDeviceList();
 	mySerial.setup(0, baud); //open the first device
-	mySerial.startContinuousRead();
+	mySerial.startContinuousRead(false);
 	ofAddListener(mySerial.NEW_MESSAGE,this,&ofApp::onNewMessage);
 	message = "";
 	setupMedia();
@@ -160,15 +160,26 @@ void ofApp::update(){
 void ofApp::updateSerials(){
 	// Loop through the serial inputs
 	for (int i = 0; i < serialInput.size(); i++) {
-		// If we have something going on with the serial input...
-		if (serialInput[i] == 1) {
-			// Increase the threshold number,
-			touchThreshold[i]++;
-			// and once that reaches 10 we can run the animation
-			if (touchThreshold[i] >= 50) {
-				// Reset the threshold
-				touchThreshold[i] = 0;
-				checkShouldRunAnimations(i);
+		// Check if it's our button first:
+		if (i == serialInput.size() - 1) {
+			// Reset stuff if we have our button press
+			if (serialInput[i] == 0) {
+				for (int i = 0; i < shouldRunAnimation.size(); i++) {
+					shouldRunAnimation[i] = false;
+					animationCounter[i] = 0;
+				}
+			}
+		} else {
+			// If we have something going on with the serial input...
+			if (serialInput[i] == 1) {
+				// Increase the threshold number,
+				touchThreshold[i]++;
+				// and once that reaches 10 we can run the animation
+				if (touchThreshold[i] >= 50) {
+					// Reset the threshold
+					touchThreshold[i] = 0;
+					checkShouldRunAnimations(i);
+				}
 			}
 		}
 	}
@@ -179,6 +190,7 @@ void ofApp::onNewMessage(string & message)
 {
 	vector<string> input = ofSplitString(message, ",");
 	serialInput.clear();
+	cout << "THE MESSAGE " << message << endl;
 	for (int i = 0; i < input.size() - 1; i++) {
 		serialInput.push_back(ofToInt(input[i]));
 	}
