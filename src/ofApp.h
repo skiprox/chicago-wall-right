@@ -64,7 +64,8 @@ class ofApp : public ofBaseApp{
     	std::array<HandMarker, 9> handMarkers;
 
         // All lines declared here
-        DashedLine leftHandMarkerLine;
+        DashedLine companiesLine,
+            leftHandMarkerLine;
 
         // All images declared here
         ofImage background;
@@ -84,7 +85,9 @@ class ofApp : public ofBaseApp{
             planeMovement;
 
         // All Text Typing animations
-        TextTyping centerLeftText,
+        TextTyping companiesCenterText,
+            companiesRightText,
+            centerLeftText,
             buildingLeftText,
             buildingRightText,
             shipText,

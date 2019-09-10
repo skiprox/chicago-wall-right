@@ -42,10 +42,20 @@ void ofApp::setupAnimations(){
 	 * ALL THE LINE ANIMATIONS GO HERE
 	 */
 	vector<std::array<glm::vec2, 2>> pts;
+	// The dashed line around the companies
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 860), glm::vec2(540, 860)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(540, 860), glm::vec2(540, 1060)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(540, 1060), glm::vec2(1370, 1060)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(1370, 1060), glm::vec2(1370, 860)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(1370, 860), glm::vec2(fixedWidth/2.0, 860)}});
+	companiesLine = DashedLine(pts, 5.0, red, 250, false);
+	pts.clear();
+	// the dashed line to the left hand marker
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 860), glm::vec2(fixedWidth/2.0, 750)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 750), glm::vec2(60, 750)}});
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(60, 750), glm::vec2(60, 625)}});
 	leftHandMarkerLine = DashedLine(pts, 5.0, red, 250, false);
+	pts.clear();
 	/**
 	 * ALL THE IMAGE ANIMATIONS GO HERE
 	 */
@@ -87,6 +97,20 @@ void ofApp::setupAnimations(){
 	/**
 	 * ALL THE TEXT TYPING GO HERE
 	 */
+	companiesCenterText = TextTyping(
+		"Lorem ipsum dolor sit amet, consectetur adipisicing\nelit, sed do eiusmod tempor incididunt ut labore et\ndolore magna aliqua. Ut enim ad minim veniam, quis\nnostrud exercitation ullamco laboris nisi ut aliquip\nex ea commodo consequat. Duis aute irure dolor in\nreprehenderit in voluptate velit esse cillum dolore\neu fugiat nulla pariatur. Excepteur sint occaecat\ncupidatat non proident, sunt in culpa qui officia\ndeserunt mollit anim id est laborum. Lorem ipsum dolor\nsit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua.",
+		glm::vec2(fixedWidth/2.0, 780),
+		ofColor(255),
+		10,
+		150
+	);
+	companiesRightText = TextTyping(
+		"Lorem ipsum dolor sit amet, consectetur adipisicing\nelit, sed do eiusmod tempor incididunt ut labore et\ndolore magna aliqua. Ut enim ad minim veniam, quis\nnostrud exercitation ullamco laboris nisi ut aliquip\nex ea commodo consequat. Duis aute irure dolor in\nreprehenderit in voluptate velit esse cillum dolore\neu fugiat nulla pariatur. Excepteur sint occaecat\ncupidatat non proident, sunt in culpa qui officia\ndeserunt mollit anim id est laborum. Lorem ipsum dolor\nsit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua.",
+		glm::vec2(1560, 960),
+		ofColor(255),
+		10,
+		150
+	);
 	centerLeftText = TextTyping(
 		"Lorem ipsum dolor sit amet, consectetur adipisicing\nelit, sed do eiusmod tempor incididunt ut labore et\ndolore magna aliqua. Ut enim ad minim veniam, quis\nnostrud exercitation ullamco laboris nisi ut aliquip\nex ea commodo consequat. Duis aute irure dolor in\nreprehenderit in voluptate velit esse cillum dolore\neu fugiat nulla pariatur. Excepteur sint occaecat\ncupidatat non proident, sunt in culpa qui officia\ndeserunt mollit anim id est laborum. Lorem ipsum dolor\nsit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua.\nUt enim ad minim veniam, quis nostrud exercitation\nullamco laboris nisi ut aliquip ex ea commodo consequat.\nDuis aute irure dolor in reprehenderit in voluptate\nvelit esse cillum dolore eu fugiat nulla pariatur.\nExcepteur sint occaecat cupidatat non proident, sunt in\nculpa qui officia deserunt mollit anim id est laborum.",
 		glm::vec2(150, 780),
@@ -339,23 +363,42 @@ void ofApp::runAnimation(int animationNum){
 		// companies show up
 		case 0:
 			ofPushStyle();
+			// The companies image
 			companiesAnimation.update(animationCounter[0]);
 			companiesAnimation.draw();
+			// Companies center hand marker
 			handMarkers[1].draw();
+			// comapnies right hand marker
 			handMarkers[2].draw();
+			// companies line
+			companiesLine.update(animationCounter[0]);
+			companiesLine.draw();
 			ofPopStyle();
 			break;
 		// Company center button pressed,
 		// left screen button shows up
 		case 1:
+			// left screen hand marker
 			leftHandMarkerLine.update(animationCounter[1]);
 			leftHandMarkerLine.draw();
+			// companies center text,
+			// only if the left building text isn't activated
+			if (!shouldRunAnimation[4]) {
+				companiesCenterText.update(animationCounter[1]);
+				companiesCenterText.draw();
+			}
 			handMarkers[3].draw();
 			break;
 		// Company right button pressed,
 		// buildings show up
 		case 2:
 			ofPushStyle();
+			// companies right text
+			// only if the left building text isn't activated
+			if (!shouldRunAnimation[5]) {
+				companiesRightText.update(animationCounter[2]);
+				companiesRightText.draw();
+			}
 			// Building Left
 			buildingLeftAnimation.update(animationCounter[2]);
 			buildingLeftAnimation.draw();
@@ -370,8 +413,12 @@ void ofApp::runAnimation(int animationNum){
 		// center left button text shows up
 		case 3:
 			ofPushStyle();
-			centerLeftText.update(animationCounter[3]);
-			centerLeftText.draw();
+			// Center left text
+			// only if the plane text isn't activated
+			if (!shouldRunAnimation[6]) {
+				centerLeftText.update(animationCounter[3]);
+				centerLeftText.draw();
+			}
 			ofPopStyle();
 			break;
 		// Left building pressed,
