@@ -29,7 +29,7 @@ void ofApp::setupMedia(){
 	buildingLeft.load("images/building-left.png");
 	buildingRight.load("images/building-right.png");
 	// VIDEOS
-	waterVideo.load("video/ripple.mp4");
+	waterVideo.load("video/ripple-looped.mp4");
 	waterVideo.play();
 }
 
@@ -67,14 +67,14 @@ void ofApp::setupAnimations(){
 	);
 	buildingLeftAnimation = ImageAnimation(
 		buildingLeft,
-		glm::vec2(515, 540),
-		glm::vec2(316, 296),
+		glm::vec2(500, 578),
+		glm::vec2(306, 287),
 		250
 	);
 	buildingRightAnimation = ImageAnimation(
 		buildingRight,
-		glm::vec2(1085, 552),
-		glm::vec2(342, 262),
+		glm::vec2(1050, 595),
+		glm::vec2(338, 259),
 		250
 	);
 	/**
