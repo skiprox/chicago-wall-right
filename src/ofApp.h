@@ -48,10 +48,10 @@ class ofApp : public ofBaseApp{
 
     	vector<int> serialInput;
 
-    	std::array<int, 9> touchThreshold = {{0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    	std::array<int, 8> touchThreshold = {{0, 0, 0, 0, 0, 0, 0, 0}};
 
-    	std::array<bool, 9> shouldRunAnimation = {{false, false, false, false, false, false, false, false, false}};
-    	std::array<int, 9> animationCounter = {{0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    	std::array<bool, 8> shouldRunAnimation = {{false, false, false, false, false, false, false, false}};
+    	std::array<int, 8> animationCounter = {{0, 0, 0, 0, 0, 0, 0, 0}};
         int universalAnimationCounter = 0;
         int universalAnimationCounterMax = 5000;
 
@@ -61,7 +61,7 @@ class ofApp : public ofBaseApp{
         vector<std::array<glm::vec2, 4>> _pts;
 
     	// All the hand markers declared here
-    	std::array<HandMarker, 9> handMarkers;
+    	std::array<HandMarker, 8> handMarkers;
 
         // All lines declared here
         DashedLine companiesLine,
@@ -85,7 +85,8 @@ class ofApp : public ofBaseApp{
             planeMovement;
 
         // All Text Typing animations
-        TextTyping companiesCenterText,
+        TextTyping milleniumFalconText,
+            companiesCenterText,
             companiesRightText,
             centerLeftText,
             buildingLeftText,
