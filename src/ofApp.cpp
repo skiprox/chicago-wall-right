@@ -205,8 +205,8 @@ void ofApp::updateSerials(){
 			if (serialInput[i] == 1) {
 				// Increase the threshold number,
 				touchThreshold[i]++;
-				// and once that reaches 10 we can run the animation
-				if (touchThreshold[i] >= 10) {
+				// and once that reaches 5 we can run the animation
+				if (touchThreshold[i] >= 5) {
 					// Reset the threshold
 					touchThreshold[i] = 0;
 					checkShouldRunAnimations(i);
