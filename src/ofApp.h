@@ -98,5 +98,9 @@ class ofApp : public ofBaseApp{
         float projectorOffsetY = 75.0;
         float projectorOffsetX = -40.0;
         float companiesOffsetY = 14.0;
+
+        // Pointing arrow
+        vector<std::array<glm::vec2, 2>> pressPts;
+        vector<DottedLine> pressLines;
 		
 };
