@@ -246,7 +246,7 @@ void ofApp::drawBackground(){
 	ofSetColor(0);
 	ofDrawRectangle(0, fixedHeight - 400, 400, 400);
 	ofPopStyle();
-	background.draw(0, 0, fixedWidth, fixedHeight);
+	background.draw(0, 30, fixedWidth, fixedHeight);
 }
 
 //--------------------------------------------------------------
