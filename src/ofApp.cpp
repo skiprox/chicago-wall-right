@@ -160,8 +160,8 @@ void ofApp::setupAnimations(){
 	handMarkers[0] = HandMarker(glm::vec2(50, fixedHeight - 260), white, true);
 	// CENTER OF THE COMPANIES
 	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/2.0 + 85, fixedHeight - 108), red, false);
-	// RIGHT OF THE COMPANIES
-	handMarkers[2] = HandMarker(glm::vec2(fixedWidth/3.0 * 2.0 + 60, fixedHeight - 185), red, false);
+	// LEFT OF THE COMPANIES
+	handMarkers[2] = HandMarker(glm::vec2(fixedWidth/3.0  + 30, fixedHeight - 108), red, false);
 	// LEFT OF THE SCREEN
 	handMarkers[3] = HandMarker(glm::vec2(30, fixedHeight/2.0 + 25), red, true);
 	// THE LEFT BUILDING
