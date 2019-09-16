@@ -7,7 +7,6 @@ void ofApp::setup(){
 	ofSetCircleResolution(100);
 	width = ofGetWidth();
 	height = ofGetHeight();
-	cout << "WIDTH: " << width << " HEIGHT: " << height << endl;
 	// Small square size
 	smSqSize = fixedHeight/5.0;
 	mySerial.listDevices();
@@ -222,7 +221,6 @@ void ofApp::onNewMessage(string & message)
 {
 	vector<string> input = ofSplitString(message, ",");
 	serialInput.clear();
-	cout << "THE MESSAGE " << message << endl;
 	for (int i = 0; i < input.size() - 1; i++) {
 		serialInput.push_back(ofToInt(input[i]));
 	}
