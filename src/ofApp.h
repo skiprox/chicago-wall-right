@@ -96,6 +96,7 @@ class ofApp : public ofBaseApp{
             planeText;
 
         float projectorOffsetY = 70.0;
+        float projectorOffsetX = -30.0;
         float companiesOffsetY = 14.0;
 		
 };

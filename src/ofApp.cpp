@@ -67,13 +67,13 @@ void ofApp::setupAnimations(){
 	);
 	buildingLeftAnimation = ImageAnimation(
 		buildingLeft,
-		glm::vec2(500, 578 + projectorOffsetY),
+		glm::vec2(500 + projectorOffsetX, 578 + projectorOffsetY),
 		glm::vec2(306, 287),
 		250
 	);
 	buildingRightAnimation = ImageAnimation(
 		buildingRight,
-		glm::vec2(1050, 595 + projectorOffsetY),
+		glm::vec2(1050 + projectorOffsetX, 595 + projectorOffsetY),
 		glm::vec2(338, 259),
 		250
 	);
@@ -244,7 +244,7 @@ void ofApp::drawBackground(){
 	ofSetColor(0);
 	ofDrawRectangle(0, fixedHeight - 400, 400, 400);
 	ofPopStyle();
-	background.draw(0, projectorOffsetY, fixedWidth, fixedHeight);
+	background.draw(projectorOffsetX, projectorOffsetY, fixedWidth, fixedHeight);
 }
 
 //--------------------------------------------------------------
