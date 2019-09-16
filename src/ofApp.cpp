@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofHideCursor();
 	ofBackground(0);
 	ofSetCircleResolution(100);
 	width = ofGetWidth();
@@ -157,7 +158,7 @@ void ofApp::setupAnimations(){
 	 * ALL THE HAND MARKERS GO HERE
 	 */
 	// MILLENIUM FALCON
-	handMarkers[0] = HandMarker(glm::vec2(100, fixedHeight - 100), red, true);
+	handMarkers[0] = HandMarker(glm::vec2(100, fixedHeight - 200), white, true);
 	// CENTER OF THE COMPANIES
 	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/2.0 + 40, fixedHeight - 115), red, false);
 	// RIGHT OF THE COMPANIES
@@ -250,7 +251,9 @@ void ofApp::drawBackground(){
 
 //--------------------------------------------------------------
 void ofApp::drawHandMarkers(){
-	handMarkers[0].draw();
+	if (!shouldRunAnimation[0]) {
+		handMarkers[0].draw();
+	}
 }
 
 //--------------------------------------------------------------
@@ -318,7 +321,7 @@ void ofApp::checkShouldRunAnimations(int index){
 			shouldRunOne = true;
 		}
 	} else if (index == 2) { // The bad companies right sensor
-		if (shouldRunAnimation[0]) {
+		if (shouldRunAnimation[3]) {
 			// Run the buildings animation
 			shouldRunOne = true;
 		}
@@ -362,10 +365,15 @@ void ofApp::runAnimation(int animationNum){
 		// companies show up
 		case 0:
 			ofPushStyle();
-			// Companies center hand marker
-			handMarkers[1].draw();
-			// comapnies right hand marker
-			handMarkers[2].draw();
+			if (!shouldRunAnimation[1]) {
+				// Companies center hand marker
+				handMarkers[1].draw();
+			}
+			if (shouldRunAnimation[3] &&
+				!shouldRunAnimation[2]) {
+				// comapnies right hand marker
+				handMarkers[2].draw();
+			}
 			// The companies image
 			companiesAnimation.update(animationCounter[0]);
 			companiesAnimation.draw();
@@ -373,42 +381,50 @@ void ofApp::runAnimation(int animationNum){
 			companiesLine.update(animationCounter[0]);
 			companiesLine.draw();
 			// Millenium falcon text
-			milleniumFalconText.update(animationCounter[0]);
-			milleniumFalconText.draw();
+			if (!shouldRunAnimation[1] &&
+				!shouldRunAnimation[2]) {
+				milleniumFalconText.update(animationCounter[0]);
+				milleniumFalconText.draw();
+			}
 			ofPopStyle();
 			break;
 		// Company center button pressed,
 		// left screen button shows up
 		case 1:
-			// left screen hand marker
-			leftHandMarkerLine.update(animationCounter[1]);
-			leftHandMarkerLine.draw();
-			// companies center text,
-			// only if the left building text isn't activated
-			if (!shouldRunAnimation[4]) {
+			// companies center stuff,
+			// only if the left screen text isn't activated
+			if (!shouldRunAnimation[3]) {
+				leftHandMarkerLine.update(animationCounter[1]);
+				leftHandMarkerLine.draw();
 				companiesCenterText.update(animationCounter[1]);
 				companiesCenterText.draw();
+				// Left screen hand marker
+				handMarkers[3].draw();
 			}
-			handMarkers[3].draw();
 			break;
 		// Company right button pressed,
 		// buildings show up
 		case 2:
 			ofPushStyle();
 			// companies right text
-			// only if the left building text isn't activated
-			if (!shouldRunAnimation[5]) {
+			// only if the building text isn't active
+			if (!shouldRunAnimation[4] &&
+				!shouldRunAnimation[5]) {
 				companiesRightText.update(animationCounter[2]);
 				companiesRightText.draw();
 			}
 			// Building Left
 			buildingLeftAnimation.update(animationCounter[2]);
 			buildingLeftAnimation.draw();
-			handMarkers[4].draw();
+			if (!shouldRunAnimation[4]) {
+				handMarkers[4].draw();
+			}
 			// Building Right
 			buildingRightAnimation.update(animationCounter[2]);
 			buildingRightAnimation.draw();
-			handMarkers[5].draw();
+			if (!shouldRunAnimation[5]) {
+				handMarkers[5].draw();
+			}
 			ofPopStyle();
 			break;
 		// Screen center left button pressed,
@@ -417,7 +433,7 @@ void ofApp::runAnimation(int animationNum){
 			ofPushStyle();
 			// Center left text
 			// only if the plane text isn't activated
-			if (!shouldRunAnimation[6]) {
+			if (!shouldRunAnimation[2]) {
 				centerLeftText.update(animationCounter[3]);
 				centerLeftText.draw();
 			}
@@ -427,8 +443,10 @@ void ofApp::runAnimation(int animationNum){
 		// left building text shows up
 		case 4: // The Left Building Text
 			ofPushStyle();
-			buildingLeftText.update(animationCounter[4]);
-			buildingLeftText.draw();
+			if (!shouldRunAnimation[6]) {
+				buildingLeftText.update(animationCounter[4]);
+				buildingLeftText.draw();
+			}
 			ofPopStyle();
 			break;
 		// Right building pressed,
@@ -437,14 +455,20 @@ void ofApp::runAnimation(int animationNum){
 			// Ship
 			shipMovement.update(animationCounter[5]);
 			shipMovement.draw();
-			handMarkers[6].draw();
+			if (!shouldRunAnimation[7]) {
+				handMarkers[6].draw();
+			}
 			// Airplane
 			planeMovement.update(animationCounter[5]);
 			planeMovement.draw();
-			handMarkers[7].draw();
+			if (!shouldRunAnimation[6]) {
+				handMarkers[7].draw();
+			}
 			// Building right text
-			buildingRightText.update(animationCounter[5]);
-			buildingRightText.draw();
+			if (!shouldRunAnimation[7]) {
+				buildingRightText.update(animationCounter[5]);
+				buildingRightText.draw();
+			}
 			break;
 		// Airplane button pressed
 		// Airplane text shows up
