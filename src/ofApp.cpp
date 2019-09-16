@@ -171,7 +171,7 @@ void ofApp::setupAnimations(){
 	// THE SHIP
 	handMarkers[6] = HandMarker(glm::vec2(1660, 600), red, true);
 	// THE AIRPLANE
-	handMarkers[7] = HandMarker(glm::vec2(165, 375), red, true);
+	handMarkers[7] = HandMarker(glm::vec2(175, 385), red, true);
 }
 
 //--------------------------------------------------------------
