@@ -52,8 +52,8 @@ void ofApp::setupAnimations(){
 	pts.clear();
 	// the dashed line to the left hand marker
 	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 860), glm::vec2(fixedWidth/2.0, 750)}});
-	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 750), glm::vec2(60, 750)}});
-	pts.push_back(array<glm::vec2, 2> {{glm::vec2(60, 750), glm::vec2(60, 625)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(fixedWidth/2.0, 750), glm::vec2(35, 750)}});
+	pts.push_back(array<glm::vec2, 2> {{glm::vec2(35, 750), glm::vec2(35, fixedHeight/2.0 + 25)}});
 	leftHandMarkerLine = DashedLine(pts, 5.0, red, 250, false);
 	pts.clear();
 	/**
@@ -157,19 +157,19 @@ void ofApp::setupAnimations(){
 	 * ALL THE HAND MARKERS GO HERE
 	 */
 	// MILLENIUM FALCON
-	handMarkers[0] = HandMarker(glm::vec2(50, fixedHeight - 260), white, true);
+	handMarkers[0] = HandMarker(glm::vec2(50, fixedHeight - 260), red, true);
 	// CENTER OF THE COMPANIES
 	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/2.0 + 85, fixedHeight - 108), red, false);
 	// LEFT OF THE COMPANIES
 	handMarkers[2] = HandMarker(glm::vec2(fixedWidth/3.0  + 30, fixedHeight - 108), red, false);
 	// LEFT OF THE SCREEN
-	handMarkers[3] = HandMarker(glm::vec2(30, fixedHeight/2.0 + 25), red, true);
+	handMarkers[3] = HandMarker(glm::vec2(35, fixedHeight/2.0 + 25), red, true);
 	// THE LEFT BUILDING
 	handMarkers[4] = HandMarker(glm::vec2(590, 520), red, true);
 	// THE RIGHT BUILDING
 	handMarkers[5] = HandMarker(glm::vec2(1085, 690), red, true);
 	// THE SHIP
-	handMarkers[6] = HandMarker(glm::vec2(1660, 585), red, true);
+	handMarkers[6] = HandMarker(glm::vec2(1660, 600), red, true);
 	// THE AIRPLANE
 	handMarkers[7] = HandMarker(glm::vec2(165, 375), red, true);
 }
