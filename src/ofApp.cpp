@@ -165,9 +165,9 @@ void ofApp::setupAnimations(){
 	// LEFT OF THE SCREEN
 	handMarkers[3] = HandMarker(glm::vec2(30, fixedHeight/2.0 + 25), red, true);
 	// THE LEFT BUILDING
-	handMarkers[4] = HandMarker(glm::vec2(570, 520), red, true);
+	handMarkers[4] = HandMarker(glm::vec2(590, 520), red, true);
 	// THE RIGHT BUILDING
-	handMarkers[5] = HandMarker(glm::vec2(1080, 670), red, true);
+	handMarkers[5] = HandMarker(glm::vec2(1085, 690), red, true);
 	// THE SHIP
 	handMarkers[6] = HandMarker(glm::vec2(1705, 720), red, true);
 	// THE AIRPLANE
