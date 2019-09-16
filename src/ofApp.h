@@ -95,7 +95,7 @@ class ofApp : public ofBaseApp{
             shipText,
             planeText;
 
-        float projectorOffsetY = 40.0;
+        float projectorOffsetY = 70.0;
         float companiesOffsetY = 14.0;
 		
 };
