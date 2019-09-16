@@ -242,16 +242,8 @@ void ofApp::drawBackground(){
 	// Draw the video
 	waterVideo.update();
 	waterVideo.draw(0, 0, fixedWidth, fixedHeight);
-	// Draw up and down lines
-	for (int i = 0; i < 2; i++) {
-		ofDrawRectangle(fixedWidth/3.0 * (i + 1) - 1, 0, 2, fixedHeight);
-		float divConst = 5.0;
-		if (i == 0) {
-			ofDrawRectangle(0, fixedHeight/divConst, fixedWidth, 2);
-		} else {
-			ofDrawRectangle(0, fixedHeight - fixedHeight/divConst, fixedWidth, 2);
-		}
-	}
+	ofSetColor(0);
+	ofDrawRectangle(0, fixedHeight - 400, 400, 400);
 	ofPopStyle();
 	background.draw(0, 0, fixedWidth, fixedHeight);
 }
