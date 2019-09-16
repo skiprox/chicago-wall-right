@@ -157,7 +157,7 @@ void ofApp::setupAnimations(){
 	 * ALL THE HAND MARKERS GO HERE
 	 */
 	// MILLENIUM FALCON
-	handMarkers[0] = HandMarker(glm::vec2(100, fixedHeight - 200), white, true);
+	handMarkers[0] = HandMarker(glm::vec2(70, fixedHeight - 230), white, true);
 	// CENTER OF THE COMPANIES
 	handMarkers[1] = HandMarker(glm::vec2(fixedWidth/2.0 + 40, fixedHeight - 115), red, false);
 	// RIGHT OF THE COMPANIES
